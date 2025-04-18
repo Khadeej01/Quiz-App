@@ -1,0 +1,42 @@
+<div class="container mx-auto mt-8 px-4">
+    <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Temps de Quiz</h1>
+    <div *ngIf="isLoading" class="text-center text-white">
+      <p>Chargement des questions...</p>
+    </div>
+    <div *ngIf="!isLoading && currentQuestionIndex < questions.length; else quizFinished" class="max-w-2xl mx-auto bg-gray-900 text-white p-6 rounded-lg shadow-lg">
+      <h2 class="text-lg font-semibold mb-4">Question {{ currentQuestionIndex + 1 }} sur {{ questions.length }}</h2>
+      <p class="text-base mb-4" [innerHTML]="questions[currentQuestionIndex].question"></p>
+      <div class="grid grid-cols-1 gap-2">
+        <button
+          *ngFor="let answer of questions[currentQuestionIndex].all_answers"
+          class="bg-gray-800 hover:bg-blue-600 text-white py-2 px-4 rounded transition"
+          [class.bg-green-600]="selectedAnswer === answer && answer === questions[currentQuestionIndex].correct_answer"
+          [class.bg-red-600]="selectedAnswer === answer && answer !== questions[currentQuestionIndex].correct_answer"
+          [disabled]="selectedAnswer !== null"
+          [innerHTML]="answer"
+          (click)="selectAnswer(answer)"
+        ></button>
+      </div>
+      <div *ngIf="feedback" class="mt-4 text-center">
+        <p class="text-base">{{ feedback }}</p>
+        <button
+          class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded mt-2 transition"
+          (click)="nextQuestion()"
+        >
+          {{ currentQuestionIndex < questions.length - 1 ? 'Question Suivante' : 'Terminer le Quiz' }}
+        </button>
+      </div>
+    </div>
+    <ng-template #quizFinished>
+      <div class="max-w-md mx-auto bg-gray-900 text-white p-6 rounded-lg shadow-lg text-center">
+        <h2 class="text-xl font-semibold mb-4">Quiz Terminé !</h2>
+        <p class="text-base mb-4">Votre score : {{ score }} / {{ questions.length }}</p>
+        <button
+          class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition"
+          (click)="navigateToHome()"
+        >
+          Retour à l’Accueil
+        </button>
+      </div>
+    </ng-template>
+  </div>

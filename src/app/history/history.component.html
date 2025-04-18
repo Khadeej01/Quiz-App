@@ -1,0 +1,48 @@
+<div class="container mx-auto mt-8 px-4">
+    <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Historique des Scores</h1>
+    <div class="max-w-4xl mx-auto bg-gray-900 text-white p-6 rounded-lg shadow-lg">
+      <div *ngIf="scores.length === 0" class="text-center">
+        <p class="text-base mb-4">Aucun score enregistré pour le moment.</p>
+        <button
+          class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition"
+          (click)="replay()"
+        >
+          Jouer un Quiz
+        </button>
+      </div>
+      <div *ngIf="scores.length > 0">
+        <table class="w-full text-left table-auto">
+          <thead>
+            <tr class="bg-gray-800">
+              <th class="px-4 py-2">Nom d’Utilisateur</th>
+              <th class="px-4 py-2">Score</th>
+              <th class="px-4 py-2">Total</th>
+              <th class="px-4 py-2">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let score of scores" class="border-b border-gray-700">
+              <td class="px-4 py-2">{{ score.username }}</td>
+              <td class="px-4 py-2">{{ score.score }}</td>
+              <td class="px-4 py-2">{{ score.total }}</td>
+              <td class="px-4 py-2">{{ score.date | date:'short' }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="mt-4 flex justify-between">
+          <button
+            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition"
+            (click)="replay()"
+          >
+            Rejouer
+          </button>
+          <button
+            class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded transition"
+            (click)="clearHistory()"
+          >
+            Supprimer l’Historique
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>

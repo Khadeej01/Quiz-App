@@ -1,0 +1,9 @@
+.container {
+    min-height: calc(100vh - 128px); /* Adjust for navbar (~64px) and footer (~64px) */
+  }
+  table {
+    border-collapse: collapse;
+  }
+  th, td {
+    border: 1px solid #4b5563; /* Tailwind gray-700 */
+  }

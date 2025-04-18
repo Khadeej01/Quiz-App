@@ -86,11 +86,16 @@
             ],
             "styles": [
               "src/styles.css"
+              
             ],
             "scripts": []
           }
+          
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "fb168429-d8c1-4feb-ac0b-9f52f42cb046"
   }
 }
